@@ -15,6 +15,7 @@ module Api::V1::Authenticatable
       raise Api::V1::Errors::AuthenticationError
     end
 
+    user.update_auth_token
     user.authentication_token
   end
 

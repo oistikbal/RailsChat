@@ -11,6 +11,7 @@ module ApplicationCable
 
     def find_verified_user
       token = request.params[:token]
+      puts request.params
       user = User.find_by(authentication_token: token)
       user || reject_unauthorized_connection
     end

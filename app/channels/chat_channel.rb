@@ -7,6 +7,7 @@ class ChatChannel < ApplicationCable::Channel
   end
 
   def receive(data)
-    ActionCable.server.broadcast("chat", data)
+    message = current_user.messages.create!(content: data['data'])
+    ActionCable.server.broadcast("chat", { type: "message", data: data['data'], user: current_user.email }.to_json)
   end
 end
